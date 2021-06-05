@@ -149,6 +149,7 @@ public void CrearLista(){
                 break;
             }
            }
+        
         setKeep(beverage1);
      
      return beverage1;}
@@ -171,31 +172,35 @@ public void CrearLista(){
          for(int i=0;i<listOrders.size();i++){
              
          l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
-         
+         System.out.println(listOrders.get(i).getCondition());
          }
          
            break;}
     
     case"Complete":{
+        
         for(int i=0;i<listOrders.size();i++){
-         if(listOrders.get(i).getCondition()=="Complete"){    
-         l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
-         }
+         if(listOrders.get(i).getCondition().equals("Complete")){    
+         
+             l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
+         
+          }
          }
         
            break;}
     case"Pending":{
        
         for(int i=0;i<listOrders.size();i++){
-         if(listOrders.get(i).getCondition()=="Pending"){    
-         l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
+         if(listOrders.get(i).getCondition().equals("Pending")){    
+         
+             l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
          }
          }
         
            break;}
     case"In Process":{
         for(int i=0;i<listOrders.size();i++){
-         if(listOrders.get(i).getCondition()=="In Process"){    
+         if(listOrders.get(i).getCondition().equals("In Process")){    
          l=l+listOrders.get(i).orders()+" "+",Order: "+i+"\n";
          }
          }
