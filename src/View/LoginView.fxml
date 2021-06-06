@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,15 +9,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="229.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="632.0" style="-fx-background-color: linear-gradient(to right, #333, #333 25%, #eee 100%, #333 75%);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Button fx:id="btnLogin" layoutX="24.0" layoutY="151.0" mnemonicParsing="false" onAction="#Login" prefHeight="33.0" prefWidth="222.0" text="Log in" textAlignment="CENTER" />
-      <TextField fx:id="txtUser" layoutX="24.0" layoutY="62.0" prefHeight="25.0" prefWidth="222.0" promptText="Username" />
-      <PasswordField fx:id="txtPassword" layoutX="24.0" layoutY="96.0" prefHeight="25.0" prefWidth="222.0" promptText="Password" />
-      <Label layoutX="109.0" layoutY="14.0" text="SIGN IN" textAlignment="CENTER">
+      <Button fx:id="btnLogin" layoutX="339.0" layoutY="283.0" mnemonicParsing="false" onAction="#Login" prefHeight="33.0" prefWidth="222.0" style="-fx-background-color: #ffc900;" text="Log in" textAlignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font name="Times New Roman" size="14.0" />
+         </font></Button>
+      <TextField fx:id="txtUser" layoutX="339.0" layoutY="205.0" prefHeight="25.0" prefWidth="222.0" promptText="Username" />
+      <PasswordField fx:id="txtPassword" layoutX="339.0" layoutY="245.0" prefHeight="25.0" prefWidth="222.0" promptText="Password" />
+      <Label layoutX="418.0" layoutY="171.0" text="SIGN IN" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
          </font>
       </Label>
+      <ImageView fitHeight="136.0" fitWidth="102.0" layoutX="400.0" layoutY="22.0">
+         <image>
+            <Image url="@../Images/Java.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="233.0" layoutY="203.0" text="Username" textFill="#ffc900">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="238.0" layoutY="243.0" text="Password" textFill="#ffc900">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="33.0" fitWidth="42.0" layoutX="367.0" layoutY="165.0">
+         <image>
+            <Image url="@../Images/lock.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="101.0" fitWidth="120.0" layoutX="14.0" layoutY="249.0">
+         <image>
+            <Image url="@../Images/LogoUNA.svg.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

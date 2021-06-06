@@ -1,0 +1,17 @@
+.button:active{
+    background:olive;
+}
+
+.button:focus{
+    background:olive;
+}
+
+.button:default:hover:pressed,
+
+.Transparentbottom:selected {
+    -fx-background-color: #ffc900 ;
+}
+
+.Trasnparentsbottom {
+    -fx-background-color: #F0E68C ;
+}
