@@ -81,120 +81,114 @@ public class BebidaPedidoController implements Initializable {
     private ToggleButton btnCandy;
     @FXML
     private TextArea txtArea;
-   
-    
-   
-    
-    ToggleButton[] vectorBotones=new ToggleButton[5];
-    
-    
-    
-   public static controller con=new controller();
-    
-   
-   
-    
+
+    ToggleButton[] vectorBotones = new ToggleButton[5];
+
+    public static controller con = new controller();
+
     @FXML
     private TextField modi;
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        vectorBotones[0]=this.btnMilk;
-        vectorBotones[1]=this.btnMocha;
-        vectorBotones[2]=this.btnSoy;
-        vectorBotones[3]=this.btnWhip;
-        vectorBotones[4]=this.btnCandy;
-    }    
-
-
+        vectorBotones[0] = this.btnMilk;
+        vectorBotones[1] = this.btnMocha;
+        vectorBotones[2] = this.btnSoy;
+        vectorBotones[3] = this.btnWhip;
+        vectorBotones[4] = this.btnCandy;
+    }
 
     @FXML
     private void eliminar(ActionEvent event) {
-        int borrar=Integer.parseInt(this.modi.getText());
-    
-      
+        int borrar = Integer.parseInt(this.modi.getText());
+
         con.getList().remove(borrar);
-    this.txtArea.setText(con.revisaOrden());
-      
-        if(con.getList().isEmpty()){this.btnRealizarPedido.setDisable(true);}
+        this.txtArea.setText(con.revisaOrden());
+
+        if (con.getList().isEmpty()) {
+            this.btnRealizarPedido.setDisable(true);
+        }
     }
 
     @FXML
     private void bebida1(ActionEvent event) {
-     this.btnBebida.setText("House Blend");}
+        this.btnBebida.setText("House Blend");
+    }
 
     @FXML
     private void bebida2(ActionEvent event) {
-    this.btnBebida.setText("Dark Roast");}
+        this.btnBebida.setText("Dark Roast");
+    }
 
     @FXML
     private void bebida3(ActionEvent event) {
-    this.btnBebida.setText("Espresso");}
+        this.btnBebida.setText("Espresso");
+    }
 
     @FXML
     private void bebida4(ActionEvent event) {
-    this.btnBebida.setText("Decaf");}
+        this.btnBebida.setText("Decaf");
+    }
 
     @FXML
     private void anadir(ActionEvent event) {
-       
-        
-        int veces=Integer.parseInt(this.txtCant.getText());
-         
-        if(!"Select a beverage".equals(this.btnBebida.getText())){
-        
-        for(int i=0;i<veces;i++){
-        
-      con.setKeep(con.CrearBebida(this.btnBebida.getText()));
-      
-            for (ToggleButton vectorBotone : vectorBotones) {
-                if (vectorBotone.isSelected()) {
-                    con.CrearDecorador(vectorBotone.getText(), con.getKeep());
+
+        int veces = Integer.parseInt(this.txtCant.getText());
+
+        if (!"Select a beverage".equals(this.btnBebida.getText())) {
+
+            for (int i = 0; i < veces; i++) {
+
+                con.setKeep(con.CrearBebida(this.btnBebida.getText()));
+
+                for (ToggleButton vectorBotone : vectorBotones) {
+                    if (vectorBotone.isSelected()) {
+                        con.CrearDecorador(vectorBotone.getText(), con.getKeep());
+                    }
                 }
+
+                con.getList().add(con.getKeep());
+
+                this.txtArea.setText(con.revisaOrden());
             }
 
-         
-       
-        con.getList().add(con.getKeep());
-        
-       this.txtArea.setText(con.revisaOrden());}
-       
-               }else{con.Alert();}
-        
-    
-    
-   this.btnRealizarPedido.setDisable(false); }
+        } else {
+            con.Alert();
+        }
 
+        this.btnRealizarPedido.setDisable(false);
+    }
 
     @FXML
     private void CancelarPedido(ActionEvent event) {
-    con.getList().clear();
-    this.txtArea.setText(null);
-   this.btnRealizarPedido.setDisable(true);
+        con.getList().clear();
+        this.txtArea.setText(null);
+        this.btnRealizarPedido.setDisable(true);
     }
-
 
     @FXML
     private void verPedidos(ActionEvent event) throws IOException {
-        Stage stage=new Stage();
-       Parent root = FXMLLoader.load(getClass().getResource("/View/Pedidos.fxml"));
-        
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Pedidos.fxml"));
+
         Scene scene = new Scene(root);
-       scene.getRoot().requestFocus();
+        scene.getRoot().requestFocus();
         stage.setScene(scene);
         stage.show();
-    
-    
+
     }
 
     @FXML
     private void realizarPedido(ActionEvent event) {
-    con.CrearOrden();
-    this.txtArea.setText(null);
-    this.btnRealizarPedido.setDisable(true);
-  con.CrearLista();}
-    
+        con.CrearOrden();
+        this.txtArea.setText(null);
+        this.btnRealizarPedido.setDisable(true);
+        con.CrearLista();
+    }
+
 }

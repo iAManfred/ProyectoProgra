@@ -44,8 +44,7 @@ public void setListDrinks(List<Beverage> listDrinks) {
 
 
   public String orders(){
-  
-      
+
       
       return " Condition: "+ getCondition()+", ";}
 
