@@ -5,8 +5,10 @@
  */
 package controller;
 
+
+
 import Model.Alert2;
-import Model.Beverage;
+import Model.Beverage1;
 import Model.Candy;
 import Model.DarkRoast;
 import Model.Decaf;
@@ -14,12 +16,17 @@ import Model.Espresso;
 import Model.HouseBlend;
 import Model.Milk;
 import Model.Mocha;
-import Model.Orders;
+import Model.Orders1;
 import Model.Soy;
 import Model.Whip;
 import javafx.scene.control.Alert;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 
 /**
  *
@@ -27,18 +34,22 @@ import java.util.List;
  */
 public class controller {
 
-    private Beverage beverage1;
-    private Beverage keep;
+    private Beverage1 beverage1;
+    private Beverage1 keep;
+    private int code=0;
+    private int codeBeverage=0;
     
-    private List<Orders> listOrders = new ArrayList<Orders>();    
-    private List<Beverage> list = new ArrayList<Beverage>();
+    private List<Orders1> listOrders = new ArrayList<Orders1>();    
+    private List<Beverage1> list = new ArrayList<Beverage1>();
     
-    public void setList(List<Beverage> list) {
+    public EntityManagerFactory emf= Persistence.createEntityManagerFactory("ProyectoProgra3Parte1PU");
+    
+    public void setList(List<Beverage1> list) {
         this.list = list;
     }
 
     public void CrearLista() {
-        List<Beverage> newList = new ArrayList<Beverage>();
+        List<Beverage1> newList = new ArrayList<Beverage1>();
         setList(newList);
     }
     
@@ -55,7 +66,7 @@ public class controller {
     public String revisarOrdenes() {
         String f = "";
         for (int i = 0; i < listOrders.size(); i++) {
-            f = f + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
+         //   f = f + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
             
         }
         return f;
@@ -71,27 +82,27 @@ public class controller {
         return f;
     }
     
-    public List<Beverage> getList() {
+    public List<Beverage1> getList() {
         return list;
     }
     
-    public List<Orders> getListOrders() {
+    public List<Orders1> getListOrders() {
         return listOrders;
     }
     
-    public Beverage getKeep() {
+    public Beverage1 getKeep() {
         return keep;
     }
     
-    public void setKeep(Beverage keep) {
+    public void setKeep(Beverage1 keep) {
         this.keep = keep;
     }
 
-    public Beverage getBeverage1() {
+    public Beverage1 getBeverage1() {
         return beverage1;
     }
     
-    public Beverage CrearBebida(String beverage) {
+    public Beverage1 CrearBebida(String beverage) {
         
         switch (beverage) {
             case "House Blend": {
@@ -124,7 +135,7 @@ public class controller {
         Alert2.showAlert("Error", "Falta la bebida base", Alert.AlertType.ERROR);
     }
     
-    public Beverage CrearDecorador(String nom, Beverage b) {
+    public Beverage1 CrearDecorador(String nom, Beverage1 b) {
         
         switch (nom) {
             case "Milk": {
@@ -159,12 +170,38 @@ public class controller {
         return beverage1;
     }
     
-    public Orders CrearOrden() {
-        Orders order = new Orders();
-        order.setListDrinks(list);
-        listOrders.add(order);
+    public void CrearOrden() throws Exception {
+       code=code+1;
+        String name= Integer.toString(code);
         
-        return order;
+        
+        
+        
+        Orders1 order = new Orders1(name,"Pending");
+     
+       
+       
+       Orders1JpaController1 jpa= new  Orders1JpaController1(emf);
+      
+       jpa.create(order);
+      
+         
+           order.setListDrinks(list);
+           listOrders.add(order);
+           for(int i=0;i<list.size();i++){
+           codeBeverage=codeBeverage+1;
+           
+            Beverage1JpaController jpaB= new  Beverage1JpaController(emf);
+            
+            Beverage1 beverage= new Beverage1(codeBeverage,getKeep().getDescription());
+            beverage.setOrderName(order);
+    
+
+          jpaB.create(beverage);
+       
+   
+           }
+        
     }
     
     public String FiltraOrdenes(String f) {
@@ -176,7 +213,7 @@ public class controller {
                 for (int i = 0; i < listOrders.size(); i++) {
                     
                     l = l + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
-                    System.out.println(listOrders.get(i).getCondition());
+                    System.out.println(listOrders.get(i).getConditioon());
                 }
                 
                 break;
@@ -185,7 +222,7 @@ public class controller {
             case "Complete": {
                 
                 for (int i = 0; i < listOrders.size(); i++) {
-                    if (listOrders.get(i).getCondition().equals("Complete")) {                        
+                    if (listOrders.get(i).getConditioon().equals("Complete")) {                        
                         
                         l = l + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
                         
@@ -197,7 +234,7 @@ public class controller {
             case "Pending": {
                 
                 for (int i = 0; i < listOrders.size(); i++) {
-                    if (listOrders.get(i).getCondition().equals("Pending")) {                        
+                    if (listOrders.get(i).getConditioon().equals("Pending")) {                        
                         
                         l = l + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
                     }
@@ -207,7 +244,7 @@ public class controller {
             }
             case "In Process": {
                 for (int i = 0; i < listOrders.size(); i++) {
-                    if (listOrders.get(i).getCondition().equals("In Process")) {                        
+                    if (listOrders.get(i).getConditioon().equals("In Process")) {                        
                         l = l + listOrders.get(i).orders() + " " + ",Order: " + i + "\n";
                     }
                 }
@@ -228,13 +265,14 @@ public class controller {
     }
     
     public void ActualizarEstado(int num, String estado) {
-        for (Orders listOrder : listOrders) {
+        for (Orders1 listOrder : listOrders) {
             if (listOrders.get(num) != null) {
-                listOrders.get(num).setCondition(estado);
+                listOrders.get(num).setConditioon(estado);
                 
             }
         }
         
     }
     
+
 }

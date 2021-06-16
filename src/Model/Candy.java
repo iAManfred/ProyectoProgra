@@ -12,18 +12,20 @@ package Model;
  * @author manfr
  */
 public class Candy extends CondimentDecorator {
-	Beverage beverage;
+	Beverage1 beverage;
       
       
-	public Candy(Beverage beverage) {
+	public Candy(Beverage1 beverage) {
 		this.beverage = beverage;
 	}
         
        
+        @Override
 	public String getDescription() {
 		return beverage.getDescription() + ", Candy";
 	}
 
+        @Override
 	public double cost() {
 		return .35 + beverage.cost();
 	}

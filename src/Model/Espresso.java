@@ -1,6 +1,6 @@
 package Model;
 
-public class Espresso extends Beverage {
+public class Espresso extends Beverage1 {
 	  
 	public Espresso() {
 		description = "Espresso";

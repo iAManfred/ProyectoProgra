@@ -79,25 +79,29 @@ public class Pedidos implements Initializable {
 
     @FXML
     private void filtrarListo(ActionEvent event) {
-    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroListo.getText())); }
+    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroListo.getText())); 
+    }
 
     @FXML
     private void filtrarEspera(ActionEvent event) {
-    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroEspera.getText()));}
+    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroEspera.getText()));
+    }
 
     @FXML
     private void filtrarProceso(ActionEvent event) {
-    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroProceso.getText()));}
+    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroProceso.getText()));
+    }
 
     @FXML
     private void filtrarTodo(ActionEvent event) {
-    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroTodos.getText()));}
+    this.txtGeneralOrders.setText(con.FiltraOrdenes(this.filtroTodos.getText()));
+    }
 
     @FXML
     private void cambiarEstadoListo(ActionEvent event) {
     int filtro=Integer.parseInt(this.txtFiltroCodigo.getText());
  
-        con.getListOrders().get(filtro).setCondition(this.cambiarEstadoListo.getText());
+        con.getListOrders().get(filtro).setConditioon(this.cambiarEstadoListo.getText());
     
     
     
@@ -107,14 +111,14 @@ public class Pedidos implements Initializable {
     private void cambiarEstadoEspera(ActionEvent event) {
    int filtro=Integer.parseInt(this.txtFiltroCodigo.getText());
     
-        con.getListOrders().get(filtro).setCondition(this.cambiarEstadoEspera.getText());
+        con.getListOrders().get(filtro).setConditioon(this.cambiarEstadoEspera.getText());
     } 
 
     @FXML
     private void cambiarEstadoProceso(ActionEvent event) {
     int filtro=Integer.parseInt(this.txtFiltroCodigo.getText());
     
-        con.getListOrders().get(filtro).setCondition(this.cambiarEstadoProceso.getText());
+        con.getListOrders().get(filtro).setConditioon(this.cambiarEstadoProceso.getText());
     }
 
 

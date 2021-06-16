@@ -5,9 +5,7 @@
  */
 package controller;
 
-import Model.Beverage;
-import Model.CondimentDecorator;
-import Model.Milk;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -89,6 +87,8 @@ public class BebidaPedidoController implements Initializable {
     @FXML
     private TextField modi;
 
+   
+    
     /**
      * Initializes the controller class.
      *
@@ -151,7 +151,7 @@ public class BebidaPedidoController implements Initializable {
                         con.CrearDecorador(vectorBotone.getText(), con.getKeep());
                     }
                 }
-
+                
                 con.getList().add(con.getKeep());
 
                 this.txtArea.setText(con.revisaOrden());
@@ -184,7 +184,7 @@ public class BebidaPedidoController implements Initializable {
     }
 
     @FXML
-    private void realizarPedido(ActionEvent event) {
+    private void realizarPedido(ActionEvent event) throws Exception {
         con.CrearOrden();
         this.txtArea.setText(null);
         this.btnRealizarPedido.setDisable(true);
