@@ -7,6 +7,7 @@ package controller;
 
 
 
+
 import Model.Alert2;
 import Model.Beverage1;
 import Model.Candy;
@@ -19,13 +20,14 @@ import Model.Mocha;
 import Model.Orders1;
 import Model.Soy;
 import Model.Whip;
+import java.io.IOException;
 import javafx.scene.control.Alert;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 
 
 /**
@@ -37,12 +39,16 @@ public class controller {
     private Beverage1 beverage1;
     private Beverage1 keep;
     private int code=0;
-    private int codeBeverage=0;
+    
+   
     
     private List<Orders1> listOrders = new ArrayList<Orders1>();    
     private List<Beverage1> list = new ArrayList<Beverage1>();
     
-    public EntityManagerFactory emf= Persistence.createEntityManagerFactory("ProyectoProgra3Parte1PU");
+    public static int codeBeverage=0;
+    
+   
+
     
     public void setList(List<Beverage1> list) {
         this.list = list;
@@ -171,36 +177,46 @@ public class controller {
     }
     
     public void CrearOrden() throws Exception {
-       code=code+1;
+       
+         code=code+1;
         String name= Integer.toString(code);
         
-        
-        
-        
-        Orders1 order = new Orders1(name,"Pending");
-     
-       
-       
-       Orders1JpaController1 jpa= new  Orders1JpaController1(emf);
-      
-       jpa.create(order);
-      
-         
-           order.setListDrinks(list);
-           listOrders.add(order);
-           for(int i=0;i<list.size();i++){
-           codeBeverage=codeBeverage+1;
-           
-            Beverage1JpaController jpaB= new  Beverage1JpaController(emf);
-            
-            Beverage1 beverage= new Beverage1(codeBeverage,getKeep().getDescription());
-            beverage.setOrderName(order);
-    
 
-          jpaB.create(beverage);
+       Server server1= new Server();
+       Client2 client= new Client2();
        
-   
-           }
+       
+      new Thread(() -> {
+    try {
+        server1.openServer();
+    } catch (IOException ex) {
+        Logger.getLogger(controller.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(controller.class.getName()).log(Level.SEVERE, null, ex);
+    }        catch (Exception ex) {
+                 Logger.getLogger(controller.class.getName()).log(Level.SEVERE, null, ex);
+             }
+}).start();
+       
+      
+      
+      Orders1 order = new Orders1(name,"Pending");
+      order.setListDrinks(list);
+      
+      new Thread(() -> {
+             try {
+                 client.Client2(order);
+             } catch (Exception ex) {
+                 Logger.getLogger(controller.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }).start();
+      
+      
+           
+           
+           listOrders.add(order);
+            
+           
         
     }
     

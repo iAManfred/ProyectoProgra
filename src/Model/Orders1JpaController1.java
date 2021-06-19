@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Model;
 
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -147,7 +147,7 @@ public class Orders1JpaController1 implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Orders1 (" + orders1 + ") cannot be destroyed since the Beverage1 " + beverage1CollectionOrphanCheckBeverage1 + " in its beverage1Collection field has a non-nullable orderName field.");
+      illegalOrphanMessages.add("This Orders1 (" + orders1 + ") cannot be destroyed since the Beverage1 " + beverage1CollectionOrphanCheckBeverage1 + " in its beverage1Collection field has a non-nullable orderName field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
