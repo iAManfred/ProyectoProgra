@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="632.0" style="-fx-background-color: linear-gradient(to right, #333, #333 25%, #eee 100%, #333 75%);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="362.0" prefWidth="632.0" style="-fx-background-color: linear-gradient(to right, #333, #333 25%, #eee 100%, #333 75%);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <Button fx:id="btnLogin" layoutX="339.0" layoutY="283.0" mnemonicParsing="false" onAction="#Login" prefHeight="33.0" prefWidth="222.0" style="-fx-background-color: #ffc900;" text="Log in" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman" size="14.0" />
-         </font></Button>
-      <TextField fx:id="txtUser" layoutX="339.0" layoutY="205.0" prefHeight="25.0" prefWidth="222.0" promptText="Username" />
-      <PasswordField fx:id="txtPassword" layoutX="339.0" layoutY="245.0" prefHeight="25.0" prefWidth="222.0" promptText="Password" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <TextField fx:id="txtUser" layoutX="339.0" layoutY="205.0" prefHeight="25.0" prefWidth="222.0" promptText="Username">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
+      <PasswordField fx:id="txtPassword" layoutX="339.0" layoutY="245.0" prefHeight="25.0" prefWidth="222.0" promptText="Password">
+         <effect>
+            <InnerShadow />
+         </effect></PasswordField>
       <Label layoutX="418.0" layoutY="171.0" text="SIGN IN" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman" size="18.0" />
@@ -26,6 +36,9 @@
          <image>
             <Image url="@../Images/Java.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
       <Label layoutX="233.0" layoutY="203.0" text="Username" textFill="#ffc900">
          <font>
@@ -41,6 +54,9 @@
          <image>
             <Image url="@../Images/lock.png" />
          </image>
+         <effect>
+            <InnerShadow />
+         </effect>
       </ImageView>
       <ImageView fitHeight="101.0" fitWidth="120.0" layoutX="14.0" layoutY="249.0">
          <image>
@@ -48,4 +64,7 @@
          </image>
       </ImageView>
    </children>
+   <effect>
+      <InnerShadow />
+   </effect>
 </AnchorPane>

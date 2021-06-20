@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -37,6 +38,8 @@ public class LoginController implements Initializable {
     private TextField txtUser;
     @FXML
     private PasswordField txtPassword;
+    @FXML
+    private AnchorPane anchor;
 
     /**
      * Initializes the controller class.

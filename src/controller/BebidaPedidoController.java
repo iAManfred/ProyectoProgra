@@ -6,9 +6,12 @@
 package controller;
 
 
+import Model.Beverage1;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -47,7 +53,7 @@ public class BebidaPedidoController implements Initializable {
     @FXML
     private Button btnAnadir;
     @FXML
-    private TextField txtCant;
+    private MenuButton txtCant;
     @FXML
     private Button btnCancelarPedido;
     @FXML
@@ -72,17 +78,29 @@ public class BebidaPedidoController implements Initializable {
     private ToggleButton btnWhip;
     @FXML
     private ToggleButton btnCandy;
-    @FXML
-    private TextArea txtArea;
+    
 
     ToggleButton[] vectorBotones = new ToggleButton[5];
 
     public static controller con = new controller();
 
-    @FXML
     private TextField modi;
+    @FXML
+    private MenuItem quantity1;
+    @FXML
+    private MenuItem quantity2;
+    @FXML
+    private MenuItem quantity3;
+    @FXML
+    private MenuItem quantity4;
+    @FXML
+    private TableView<Beverage1> tableBeverage;
 
-   
+   int veces=0;
+    @FXML
+    private TableColumn<Beverage1, String> tbleColumBeverage;
+    
+    private ObservableList<Beverage1>items=FXCollections.observableArrayList();
     
     /**
      * Initializes the controller class.
@@ -100,10 +118,10 @@ public class BebidaPedidoController implements Initializable {
 
     @FXML
     private void eliminar(ActionEvent event) {
-        int borrar = Integer.parseInt(this.modi.getText());
+       
 
-        con.getList().remove(borrar);
-        this.txtArea.setText(con.revisaOrden());
+        con.getList().remove(con.getKeep());
+        this.items.remove(con.getKeep());
 
         if (con.getList().isEmpty()) {
             this.btnRealizarPedido.setDisable(true);
@@ -133,10 +151,10 @@ public class BebidaPedidoController implements Initializable {
     @FXML
     private void anadir(ActionEvent event) {
 
-        int veces = Integer.parseInt(this.txtCant.getText());
+        
 
         if (!"Select a beverage".equals(this.btnBebida.getText())) {
-
+           if(veces!=0){
             for (int i = 0; i < veces; i++) {
 
                 con.setKeep(con.CrearBebida(this.btnBebida.getText()));
@@ -148,22 +166,29 @@ public class BebidaPedidoController implements Initializable {
                 }
                 
                 con.getList().add(con.getKeep());
-
-                this.txtArea.setText(con.revisaOrden());
+                 
+                items.add(con.getKeep());
+                 tableBeverage.setItems(items);
+                 tbleColumBeverage.setCellValueFactory(new PropertyValueFactory<Beverage1,String>("Description"));
+                 
+                
             }
+           }
 
         } else {
             con.Alert();
         }
-
-        this.btnRealizarPedido.setDisable(false);
+         this.btnRealizarPedido.setDisable(false);
+        
     }
 
     @FXML
     private void CancelarPedido(ActionEvent event) {
         con.getList().clear();
-        this.txtArea.setText(null);
+        
         this.btnRealizarPedido.setDisable(true);
+       tableBeverage.setItems(null);
+         items.clear();
     }
 
     @FXML
@@ -181,9 +206,44 @@ public class BebidaPedidoController implements Initializable {
     @FXML
     private void realizarPedido(ActionEvent event) throws Exception {
         con.CrearOrden();
-        this.txtArea.setText(null);
+        
         this.btnRealizarPedido.setDisable(true);
         con.CrearLista();
+         tableBeverage.setItems(null);
+        items.clear();
+    
+    
+    }
+
+    @FXML
+    private void Number1(ActionEvent event) {
+    this.txtCant.setText("1");
+    veces=1;
+    }
+
+    @FXML
+    private void Number2(ActionEvent event) {
+    this.txtCant.setText("2");
+    veces=2;
+    }
+
+    @FXML
+    private void Number3(ActionEvent event) {
+    this.txtCant.setText("3");
+    veces=3;
+    }
+
+    @FXML
+    private void Number4(ActionEvent event) {
+    this.txtCant.setText("4");
+    veces=4;
+    }
+
+    @FXML
+    private void SelectObject(MouseEvent event) {
+    
+    con.setKeep(this.tableBeverage.getSelectionModel().getSelectedItem());
+    
     }
 
 }

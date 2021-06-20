@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="508.0" prefWidth="692.0" style="-fx-background-color: linear-gradient(to right, #333, #333 25%, #eee 100%, #333 75%);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Pedidos">
+<AnchorPane id="AnchorPane" fx:id="anchor" prefHeight="508.0" prefWidth="692.0" style="-fx-background-color: linear-gradient(to right, #333, #333 25%, #eee 100%, #333 75%);" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Pedidos">
    <children>
-      <TextField fx:id="txtFiltroCodigo" layoutX="25.0" layoutY="47.0" />
+      <TextField fx:id="txtFiltroCodigo" layoutX="28.0" layoutY="47.0" prefHeight="31.0" prefWidth="184.0">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
       <Label fx:id="labelFilter" layoutX="45.0" layoutY="15.0" text="Filter by Code" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -27,6 +29,9 @@
             <MenuItem fx:id="filtroProceso" mnemonicParsing="false" onAction="#filtrarProceso" text="In Process" />
             <MenuItem fx:id="filtroTodos" mnemonicParsing="false" onAction="#filtrarTodo" text="All" />
         </items>
+         <effect>
+            <InnerShadow />
+         </effect>
       </MenuButton>
       <MenuButton fx:id="cambiarEstado" layoutX="472.0" layoutY="409.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="138.0" style="-fx-background-color: #ffc900;" text="Change Status">
         <items>
@@ -34,24 +39,41 @@
           <MenuItem fx:id="cambiarEstadoEspera" mnemonicParsing="false" onAction="#cambiarEstadoEspera" text="Pending" />
             <MenuItem fx:id="cambiarEstadoProceso" mnemonicParsing="false" onAction="#cambiarEstadoProceso" text="In Process" />
         </items>
+         <effect>
+            <InnerShadow />
+         </effect>
       </MenuButton>
       <Label fx:id="labelFilterStatus" layoutX="231.0" layoutY="15.0" text="Filter by Status" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <TextArea fx:id="txtDesc" editable="false" layoutX="399.0" layoutY="47.0" prefHeight="355.0" prefWidth="270.0">
+      <TextArea fx:id="txtDesc" editable="false" layoutX="399.0" layoutY="47.0" prefHeight="355.0" prefWidth="276.0">
          <font>
             <Font name="Arial" size="13.0" />
-         </font></TextArea>
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect></TextArea>
       <Label fx:id="OrderInfo" layoutX="495.0" layoutY="25.0" text="Order Info.">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtGeneralOrders" editable="false" layoutX="25.0" layoutY="78.0" prefHeight="339.0" prefWidth="335.0">
-         <font>
-            <Font name="Arial" size="13.0" />
-         </font></TextArea>
-      <Button fx:id="btnSearch" layoutX="138.0" layoutY="427.0" mnemonicParsing="false" onAction="#filtrarNombre" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #ffc900;" text="Search" />
+      <Button fx:id="btnSearch" layoutX="157.0" layoutY="409.0" mnemonicParsing="false" onAction="#filtrarNombre" prefHeight="36.0" prefWidth="110.0" style="-fx-background-color: #ffc900;" text="Search">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
+      <TableView fx:id="tableOrders" layoutX="28.0" layoutY="78.0" onMouseClicked="#Select" prefHeight="313.0" prefWidth="334.0">
+        <columns>
+          <TableColumn fx:id="columCode" prefWidth="123.0" text="Order Number" />
+          <TableColumn fx:id="columCondition" prefWidth="208.0" text="Condition" />
+        </columns>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </TableView>
    </children>
+   <effect>
+      <InnerShadow />
+   </effect>
 </AnchorPane>

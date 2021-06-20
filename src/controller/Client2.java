@@ -10,11 +10,19 @@ import java.net.*;
 class Client2 {
 
 
+    
+    
+    
+    
+    
+    
+    
 	public void Client2(Orders1 order)
 		throws Exception
 	{
             
             try (Socket socket = new Socket("localhost",222)) {
+                System.out.println("Client: Sending Order");
                 OutputStream out= socket.getOutputStream();
                 ObjectOutputStream object= new ObjectOutputStream(out);
                 object.writeObject(order);
@@ -22,7 +30,7 @@ class Client2 {
                 BufferedReader br= new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String str1 = br.readLine();
                 
-                System.out.println(str1);
+                socket.close();
             }
            
         

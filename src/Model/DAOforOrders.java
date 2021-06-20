@@ -5,29 +5,24 @@
  */
 package Model;
 
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import Model.Beverage1;
-import Model.Orders1;
 import controller.exceptions.IllegalOrphanException;
 import controller.exceptions.NonexistentEntityException;
 import controller.exceptions.PreexistingEntityException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 
 /**
  *
  * @author manfr
  */
-public class Orders1JpaController1 implements Serializable {
+public class DAOforOrders implements Serializable, DAOorders1 {
 
-    public Orders1JpaController1(EntityManagerFactory emf) {
+     public DAOforOrders(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -35,7 +30,10 @@ public class Orders1JpaController1 implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+    
+    
+    
+    @Override
     public void create(Orders1 orders1) throws PreexistingEntityException, Exception {
         if (orders1.getBeverage1Collection() == null) {
             orders1.setBeverage1Collection(new ArrayList<Beverage1>());
@@ -73,8 +71,11 @@ public class Orders1JpaController1 implements Serializable {
         }
     }
 
+    
+
+    @Override
     public void edit(Orders1 orders1) throws IllegalOrphanException, NonexistentEntityException, Exception {
-        EntityManager em = null;
+         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -129,6 +130,9 @@ public class Orders1JpaController1 implements Serializable {
         }
     }
 
+    
+
+    @Override
     public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
@@ -147,7 +151,7 @@ public class Orders1JpaController1 implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-      illegalOrphanMessages.add("This Orders1 (" + orders1 + ") cannot be destroyed since the Beverage1 " + beverage1CollectionOrphanCheckBeverage1 + " in its beverage1Collection field has a non-nullable orderName field.");
+                illegalOrphanMessages.add("This Orders1 (" + orders1 + ") cannot be destroyed since the Beverage1 " + beverage1CollectionOrphanCheckBeverage1 + " in its beverage1Collection field has a non-nullable orderName field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -161,32 +165,11 @@ public class Orders1JpaController1 implements Serializable {
         }
     }
 
-    public List<Orders1> findOrders1Entities() {
-        return findOrders1Entities(true, -1, -1);
-    }
+    
 
-    public List<Orders1> findOrders1Entities(int maxResults, int firstResult) {
-        return findOrders1Entities(false, maxResults, firstResult);
-    }
-
-    private List<Orders1> findOrders1Entities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Orders1.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
-        }
-    }
-
+    @Override
     public Orders1 findOrders1(String id) {
-        EntityManager em = getEntityManager();
+  EntityManager em = getEntityManager();
         try {
             return em.find(Orders1.class, id);
         } finally {
@@ -194,17 +177,34 @@ public class Orders1JpaController1 implements Serializable {
         }
     }
 
-    public int getOrders1Count() {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Orders1> rt = cq.from(Orders1.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
-    }
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
